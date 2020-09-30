@@ -1,0 +1,10 @@
+div.button {
+  border: 3px solid goldenrod;
+  background-color: #00008b5e;
+  color: white;
+  cursor: pointer;
+}
+
+div.button.disabled {
+  cursor: not-allowed;
+}
