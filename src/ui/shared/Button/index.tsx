@@ -4,10 +4,10 @@ import "./Button.css";
 type TButtons = "default" | "linkButton";
 
 interface IButtonProps {
-  text: string;
-  onClick: (evt: MouseEvent) => void;
-  disabled: boolean;
-  buttonType?: TButtons;
+  text        : string;
+  onClick     : (evt: MouseEvent) => void;
+  disabled    : boolean;
+  buttonType? : TButtons;
 }
 
 const Button: React.FC<IButtonProps> = ({
@@ -21,7 +21,7 @@ const Button: React.FC<IButtonProps> = ({
     (buttonType === "default" ? "" : "link-") +
     "button " +
     (disabled ? "disabled" : "");
-    
+
   const clickFunc = !disabled ? onClick : () => null;
 
   return (

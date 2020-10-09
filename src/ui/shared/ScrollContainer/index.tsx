@@ -1,20 +1,20 @@
 import React from "react";
 
+type TDirection = "horizontal" | "vertical" | "both" | "auto" | "hidden"
+
 interface IScrollContainer {
-  direction?  : "horizontal" | "vertical" | "both" | "auto" | "hidden"
+  direction?  : TDirection
   height?     : string | number
   width?      : string | number
   className?  : string
-  overlay?    : boolean
 }
 
 const ScrollContainer: React.FC<IScrollContainer> = ({
   children,
   className,
-  direction = "auto",
-  height = "auto",
-  width = "auto",
-  overlay = false
+  direction   = "auto",
+  height      = "auto",
+  width       = "auto",
 }) => {
 
   const scrollStyling: any = {
@@ -23,25 +23,23 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
     width,
   };
 
-  const scrollValue = overlay ? 'overlay' : 'scroll'
-
   switch (direction) {
     case "horizontal":
-      scrollStyling["overflowX"] = scrollValue;
-      scrollStyling["overflowY"] = "hidden";
+      scrollStyling["overflowX"] = 'scroll';
+      scrollStyling["overflowY"] = 'hidden';
       break;
     case "vertical":
-      scrollStyling["overflowY"] = scrollValue;
-      scrollStyling["overflowX"] = "hidden";
+      scrollStyling["overflowY"] = 'scroll';
+      scrollStyling["overflowX"] = 'hidden';
       break;
     case "both":
-      scrollStyling["overflow"] = scrollValue;
+      scrollStyling["overflow"] = 'scroll';
       break;
     case "auto":
       scrollStyling["overflow"] = "auto";
       break;
     case "hidden":
-      scrollStyling["overflow"] = "hidden";
+      scrollStyling["overflow"] = 'hidden';
       break;
   }
 
