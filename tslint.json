@@ -1,0 +1,36 @@
+{
+  "extends": [ "tslint:latest","tslint-config-prettier"],
+  "autoFixOnSave": true,
+  "verbose": true,
+  "linterOptions": {
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [
+      "node_modules/**/*.tsx",
+      "node_modules/**/*.js"
+    ]
+  },
+  "rules": {
+    "no-submodule-imports": [true ,"coreux-widgets", "lodash/fp","antd/lib/icon"],
+    "no-console": false,
+    "import-name": false,
+    "no-boolean-literal-compare": true,
+    "no-increment-decrement": false,
+    "no-unused-expression": true,
+    "max-line-length": [
+      true,
+      {
+        "limit": 120,
+        "ignore-pattern": "^import |^export {(.*?)}|class [a-zA-Z]+ implements |//",
+        "ignoreUrls": true
+      }
+    ],
+    "object-shorthand-properties-first": false,
+    "ordered-imports": true,
+    "object-literal-sort-keys": false,
+    "quotemark": [true, "single"],
+    "variable-name": true,
+    "interface-over-type-literal": false
+  }
+}
