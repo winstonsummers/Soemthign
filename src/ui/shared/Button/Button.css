@@ -3,8 +3,24 @@ div.button {
   background-color: #00008b5e;
   color: white;
   cursor: pointer;
+  padding: .5em;
+  width: 3em;
+  text-align: center;
 }
 
 div.button.disabled {
   cursor: not-allowed;
+  background-color: #2525389c;
+}
+
+div.link-button {
+  color: goldenrod;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
+div.link-button.disabled {
+  cursor: not-allowed;
+  text-decoration: line-through;
 }

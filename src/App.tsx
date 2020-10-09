@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, MouseEvent } from 'react';
 import './App.css';
+import Button from './ui/shared/Button';
 
 function App() {
+  const [disabled, setDisabled] = useState(false)
+  const onClick = (evt: MouseEvent) => {
+    console.log(evt)
+    setDisabled(!disabled)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Button 
+        text="hello"
+        onClick={onClick}
+        disabled={disabled}
+      />
+      <Button
+        text="reset"
+        onClick={onClick}
+        disabled={!disabled}
+      />
     </div>
   );
 }
