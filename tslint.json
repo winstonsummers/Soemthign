@@ -22,10 +22,10 @@
       true,
       {
         "limit": 120,
-        "ignore-pattern": "^import |^export {(.*?)}|class [a-zA-Z]+ implements |//",
-        "ignoreUrls": true
+        "ignore-pattern": "^import |^export {(.*?)}|class [a-zA-Z]+ implements |//"
       }
     ],
+    "no-string-literal": false,
     "object-shorthand-properties-first": false,
     "ordered-imports": true,
     "object-literal-sort-keys": false,
