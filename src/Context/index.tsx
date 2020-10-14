@@ -14,7 +14,7 @@ interface IState {
 }
 
 const initialState = {
-    something: true
+    something: true,
 }
 
 const reducer = (state: IState, action: IAction) => {

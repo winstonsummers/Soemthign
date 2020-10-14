@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef } from 'react'
+import ScrollItem from './ScollItem'
 
-type TScrollDirection = 'horizontal' | 'vertical' | 'both' | 'auto' | 'hidden'
+export type TScrollDirection = 'horizontal' | 'vertical'
 type TFlowDirection = 'top' | 'bottom'
 
 interface IScrollContainer {
@@ -14,7 +15,7 @@ interface IScrollContainer {
 const ScrollContainer: React.FC<IScrollContainer> = ({
     children,
     className,
-    scrollDirection = 'auto',
+    scrollDirection = 'vertical',
     height = 'auto',
     width = 'auto',
     flowDirection = 'bottom',
@@ -34,15 +35,6 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
             scrollStyling['overflowY'] = 'scroll'
             scrollStyling['overflowX'] = 'hidden'
             break
-        case 'both':
-            scrollStyling['overflow'] = 'scroll'
-            break
-        case 'auto':
-            scrollStyling['overflow'] = 'auto'
-            break
-        case 'hidden':
-            scrollStyling['overflow'] = 'hidden'
-            break
     }
 
     const endOfContainer = useRef<HTMLDivElement>(null)
@@ -54,13 +46,22 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
         }
     }, [numberOfChildren])
 
-    const content: Element | React.ReactNode[] = [children]
-    const endOfContainerDiv = <div ref={endOfContainer} />
+    const content: Element | React.ReactNode[] = [children as []].map(
+        (item) => {
+            return <ScrollItem scrollDirection={scrollDirection} item={item} />
+        },
+    )
+    const endOfContainerElement =
+        scrollDirection === 'vertical' ? (
+            <div ref={endOfContainer} />
+        ) : (
+            <span ref={endOfContainer} />
+        )
 
     if (flowDirection === 'bottom') {
-        content.push(endOfContainerDiv)
+        content.push(endOfContainerElement)
     } else {
-        content.unshift(endOfContainerDiv)
+        content.unshift(endOfContainerElement)
     }
 
     return (

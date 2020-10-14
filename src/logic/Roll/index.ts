@@ -1,3 +1,3 @@
-import RollBuilder from './RollBuilder';
+import RollBuilder from './RollBuilder'
 
 export default RollBuilder

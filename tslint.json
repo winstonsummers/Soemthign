@@ -32,7 +32,8 @@
     "quotemark": [true, "single"],
     "variable-name": {
       "options": [
-        "allow-pascal-case"
+        "allow-pascal-case",
+        "allow-leading-underscore"
       ]
     },
     "interface-over-type-literal": false
