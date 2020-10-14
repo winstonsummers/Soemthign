@@ -11,7 +11,7 @@ function App() {
     }
     return (
         <div className='App'>
-            <ScrollContainer height={50} width={150} direction='vertical'>
+            <ScrollContainer height={50} width={150} scrollDirection='vertical'>
                 <Button text='hello' onClick={onClick} disabled={disabled} />
                 <Button text='reset' onClick={onClick} disabled={!disabled} />
             </ScrollContainer>

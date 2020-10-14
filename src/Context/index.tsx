@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 
 const AppContext: any = React.createContext({})
 
@@ -9,9 +9,13 @@ interface IAction {
     value: any
 }
 
-interface IState {}
+interface IState {
+    something: boolean
+}
 
-const initialState = {}
+const initialState = {
+    something: true
+}
 
 const reducer = (state: IState, action: IAction) => {
     switch (action.type) {

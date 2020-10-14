@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 
-type TDirection = 'horizontal' | 'vertical' | 'both' | 'auto' | 'hidden'
+type TScrollDirection = 'horizontal' | 'vertical' | 'both' | 'auto' | 'hidden'
+type TFlowDirection = 'top' | 'bottom'
 
 interface IScrollContainer {
-    direction?: TDirection
+    scrollDirection?: TScrollDirection
     height?: string | number
     width?: string | number
     className?: string
+    flowDirection?: TFlowDirection
 }
 
 const ScrollContainer: React.FC<IScrollContainer> = ({
     children,
     className,
-    direction = 'auto',
+    scrollDirection = 'auto',
     height = 'auto',
     width = 'auto',
+    flowDirection = 'bottom',
 }) => {
     const scrollStyling: any = {
         scrollBehavior: 'smooth',
@@ -22,7 +25,7 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
         width,
     }
 
-    switch (direction) {
+    switch (scrollDirection) {
         case 'horizontal':
             scrollStyling['overflowX'] = 'scroll'
             scrollStyling['overflowY'] = 'hidden'
@@ -42,11 +45,27 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
             break
     }
 
-    // TODO: add logic for scroll to bottom and such
+    const endOfContainer = useRef<HTMLDivElement>(null)
+    const numberOfChildren = [children as []].length
+
+    useLayoutEffect(() => {
+        if (endOfContainer.current !== null) {
+            endOfContainer.current.scrollIntoView({ behavior: 'smooth' })
+        }
+    }, [numberOfChildren])
+
+    const content: Element | React.ReactNode[] = [children]
+    const endOfContainerDiv = <div ref={endOfContainer} />
+
+    if (flowDirection === 'bottom') {
+        content.push(endOfContainerDiv)
+    } else {
+        content.unshift(endOfContainerDiv)
+    }
 
     return (
         <div style={scrollStyling} className={className}>
-            {children}
+            {content}
         </div>
     )
 }
