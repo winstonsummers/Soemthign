@@ -12,7 +12,11 @@ function App() {
 
     return (
         <div className='App'>
-            <ScrollContainer height={50} width={150} scrollDirection='vertical'>
+            <ScrollContainer height={100} width={100} >
+                <Button text='hello' onClick={onClick} disabled={disabled} />
+                <Button text='reset' onClick={onClick} disabled={!disabled} />
+                <Button text='hello' onClick={onClick} disabled={disabled} />
+                <Button text='reset' onClick={onClick} disabled={!disabled} />
                 <Button text='hello' onClick={onClick} disabled={disabled} />
                 <Button text='reset' onClick={onClick} disabled={!disabled} />
             </ScrollContainer>

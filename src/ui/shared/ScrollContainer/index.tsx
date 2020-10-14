@@ -1,11 +1,10 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import ScrollItem from './ScollItem'
 
-export type TScrollDirection = 'horizontal' | 'vertical'
 type TFlowDirection = 'top' | 'bottom'
 
 interface IScrollContainer {
-    scrollDirection?: TScrollDirection
+    children: React.ReactNode[]
     height?: string | number
     width?: string | number
     className?: string
@@ -15,7 +14,6 @@ interface IScrollContainer {
 const ScrollContainer: React.FC<IScrollContainer> = ({
     children,
     className,
-    scrollDirection = 'vertical',
     height = 'auto',
     width = 'auto',
     flowDirection = 'bottom',
@@ -24,21 +22,12 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
         scrollBehavior: 'smooth',
         height,
         width,
-    }
-
-    switch (scrollDirection) {
-        case 'horizontal':
-            scrollStyling['overflowX'] = 'scroll'
-            scrollStyling['overflowY'] = 'hidden'
-            break
-        case 'vertical':
-            scrollStyling['overflowY'] = 'scroll'
-            scrollStyling['overflowX'] = 'hidden'
-            break
+        overflowX: 'hidden',
+        overflowY: 'scroll'
     }
 
     const endOfContainer = useRef<HTMLDivElement>(null)
-    const numberOfChildren = [children as []].length
+    const numberOfChildren = children.length
 
     useLayoutEffect(() => {
         if (endOfContainer.current !== null) {
@@ -46,17 +35,18 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
         }
     }, [numberOfChildren])
 
-    const content: Element | React.ReactNode[] = [children as []].map(
-        (item) => {
-            return <ScrollItem scrollDirection={scrollDirection} item={item} />
+    const content = children.map(
+        (item, index) => {
+            return (
+                <ScrollItem
+                    key={index + 'of' + numberOfChildren}
+                    item={item}
+                />
+            )
         },
     )
-    const endOfContainerElement =
-        scrollDirection === 'vertical' ? (
-            <div ref={endOfContainer} />
-        ) : (
-            <span ref={endOfContainer} />
-        )
+
+    const endOfContainerElement = <div key={'endof' + numberOfChildren} ref={endOfContainer} /> 
 
     if (flowDirection === 'bottom') {
         content.push(endOfContainerElement)
