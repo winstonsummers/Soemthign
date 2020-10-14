@@ -81,9 +81,9 @@ export default class Roll implements IRoll {
         const onesPlace = d(10) + ''
         let res = 0
 
-        if (tensPlace == '10' && onesPlace == '10') {
+        if (tensPlace === '10' && onesPlace === '10') {
             res = 100
-        } else if (tensPlace == '10') {
+        } else if (tensPlace === '10') {
             res = Number(onesPlace)
         } else {
             res = Number(tensPlace + onesPlace + '')
