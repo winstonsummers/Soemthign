@@ -9,6 +9,7 @@ interface IScrollContainer {
     width?: string | number
     className?: string
     flowDirection?: TFlowDirection
+    scrollToBottom?: boolean
 }
 
 const ScrollContainer: React.FC<IScrollContainer> = ({
@@ -17,6 +18,7 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
     height = 'auto',
     width = 'auto',
     flowDirection = 'bottom',
+    scrollToBottom = true
 }) => {
     const scrollStyling: any = {
         scrollBehavior: 'smooth',
@@ -30,10 +32,10 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
     const numberOfChildren = children.length
 
     useLayoutEffect(() => {
-        if (endOfContainer.current !== null) {
+        if (scrollToBottom && endOfContainer.current !== null) {
             endOfContainer.current.scrollIntoView({ behavior: 'smooth' })
         }
-    }, [numberOfChildren])
+    }, [numberOfChildren, scrollToBottom])
 
     const content = children.map(
         (item, index) => {
@@ -46,7 +48,7 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
         },
     )
 
-    const endOfContainerElement = <div key={'endof' + numberOfChildren} ref={endOfContainer} /> 
+    const endOfContainerElement = <ScrollItem key={'endof' + numberOfChildren} item={<div ref={endOfContainer} /> } />
 
     if (flowDirection === 'bottom') {
         content.push(endOfContainerElement)
