@@ -9,7 +9,6 @@ interface IScrollContainer {
     className?: string
 }
 
-// tslint:disable-next-line: variable-name
 const ScrollContainer: React.FC<IScrollContainer> = ({
     children,
     className,

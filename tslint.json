@@ -30,7 +30,11 @@
     "ordered-imports": true,
     "object-literal-sort-keys": false,
     "quotemark": [true, "single"],
-    "variable-name": true,
+    "variable-name": {
+      "options": [
+        "allow-pascal-case"
+      ]
+    },
     "interface-over-type-literal": false
   }
 }

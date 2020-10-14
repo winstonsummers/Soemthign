@@ -10,7 +10,6 @@ interface IButtonProps {
     buttonType?: TButtons
 }
 
-// tslint:disable-next-line: variable-name
 const Button: React.FC<IButtonProps> = ({
     text,
     onClick,
