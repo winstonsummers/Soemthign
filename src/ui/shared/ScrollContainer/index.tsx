@@ -18,14 +18,14 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
     height = 'auto',
     width = 'auto',
     flowDirection = 'bottom',
-    scrollToBottom = true
+    scrollToBottom = true,
 }) => {
     const scrollStyling: any = {
         scrollBehavior: 'smooth',
         height,
         width,
         overflowX: 'hidden',
-        overflowY: 'scroll'
+        overflowY: 'scroll',
     }
 
     const endOfContainer = useRef<HTMLDivElement>(null)
@@ -37,18 +37,16 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
         }
     }, [numberOfChildren, scrollToBottom])
 
-    const content = children.map(
-        (item, index) => {
-            return (
-                <ScrollItem
-                    key={index + 'of' + numberOfChildren}
-                    item={item}
-                />
-            )
-        },
-    )
+    const content = children.map((item, index) => {
+        return <ScrollItem key={index + 'of' + numberOfChildren} item={item} />
+    })
 
-    const endOfContainerElement = <ScrollItem key={'endof' + numberOfChildren} item={<div ref={endOfContainer} /> } />
+    const endOfContainerElement = (
+        <ScrollItem
+            key={'endof' + numberOfChildren}
+            item={<div ref={endOfContainer} />}
+        />
+    )
 
     if (flowDirection === 'bottom') {
         content.push(endOfContainerElement)

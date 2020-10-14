@@ -5,7 +5,7 @@ interface IScrollItem {
 }
 
 const ScrollItem: React.FC<IScrollItem> = ({ item }) => {
-    return <div style={{display: 'inline-block'}}>{item}</div>
+    return <div style={{ display: 'inline-block' }}>{item}</div>
 }
 
 export default ScrollItem
