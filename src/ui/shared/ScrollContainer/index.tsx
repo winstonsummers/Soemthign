@@ -4,7 +4,7 @@ import ScrollItem from './ScollItem'
 type TFlowDirection = 'top' | 'bottom'
 
 interface IScrollContainer {
-    children: React.ReactNode[]
+    children: any // React.ReactNode[]
     height?: string | number
     width?: string | number
     className?: string
@@ -22,14 +22,17 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
 }) => {
     const scrollStyling: any = {
         scrollBehavior: 'smooth',
-        height,
-        width,
         overflowX: 'hidden',
         overflowY: 'scroll',
     }
 
+    if(!className) {
+        Object.assign(scrollStyling, { height, width })
+    }
+
+    const cleanChildren = children.length ? children : [children]
     const endOfContainer = useRef<HTMLDivElement>(null)
-    const numberOfChildren = children.length
+    const numberOfChildren = cleanChildren.length
 
     useLayoutEffect(() => {
         if (scrollToBottom && endOfContainer.current !== null) {
@@ -37,7 +40,7 @@ const ScrollContainer: React.FC<IScrollContainer> = ({
         }
     }, [numberOfChildren, scrollToBottom])
 
-    const content = children.map((item, index) => {
+    const content = cleanChildren.map((item: any, index: number) => {
         return <ScrollItem key={index + 'of' + numberOfChildren} item={item} />
     })
 
